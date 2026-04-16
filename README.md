@@ -194,4 +194,4 @@ https://neelabho.pythonanywhere.com
 
 ## Author
 
-Neelabho Chakraborty
+Neelabho Chakraborty & Aakriti Thakur
