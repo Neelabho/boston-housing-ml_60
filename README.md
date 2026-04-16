@@ -25,7 +25,7 @@ Users provide thirteen neighborhood features such as crime rate, number of rooms
 
 ## Machine Learning Details
 
-Dataset: Boston Housing Dataset  https://www.kaggle.com/datasets/arunjathari/bostonhousepricedata
+Dataset: Boston Housing Dataset  https://www.kaggle.com/datasets/arunjathari/bostonhousepricedata <br>
 Number of rows: 506  
 Number of features: 13  
 Target variable: MEDV (median value in thousands of dollars)
