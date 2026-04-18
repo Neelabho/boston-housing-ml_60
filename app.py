@@ -12,7 +12,6 @@ import numpy as np
 import joblib
 from flask import Flask, render_template, request, jsonify
 
-# __name__ tells Flask where to find templates/ and static/ folders
 app = Flask(__name__)
 
 try:
@@ -25,10 +24,9 @@ except FileNotFoundError:
     model  = None
     scaler = None
 
-# Route 1: Serve the main page 
+# Route 1: Main page 
 @app.route("/")
 def home():
-    # render_template looks in the templates/ folder for index.html
     return render_template("index.html")
 
 # Route 2: Handle prediction requests 
@@ -38,7 +36,6 @@ def predict():
         return jsonify({"error": "Model not loaded. Run train_model.py first."}), 500
 
     try:
-        # Get the JSON body sent by JavaScript's fetch() call
         data = request.get_json()
 
         features = [
@@ -63,10 +60,8 @@ def predict():
         # Scale using the same scaler used during training
         features_scaled = scaler.transform(features_array)
 
-        # Run prediction 
         prediction = model.predict(features_scaled)[0]
 
-        # Round to 2 decimal places and return as JSON
         return jsonify({"prediction": round(float(prediction), 2)})
 
     except KeyError as e:
