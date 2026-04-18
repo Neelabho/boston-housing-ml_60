@@ -312,6 +312,34 @@
       margin: 16px 0 8px;
     }
 
+    .inflation-block {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: #eff6ff;
+      border-radius: 8px;
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .inflation-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    
+    .inflation-value {
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a56db;
+      margin-bottom: 6px;
+    }
+    
+    .inflation-note {
+      font-size: 11px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
     .feature-row {
       display: flex;
       justify-content: space-between;
@@ -547,7 +575,17 @@
         <div class="result-price-label">Estimated median home value</div>
         <div>
           <span class="result-price" id="result-price-value">—</span>
-          <span class="result-unit">thousands USD (×$1,000)</span>
+          <span class="result-unit">thousands USD (1970 value)</span>
+        </div>
+
+        <div class="inflation-block" id="inflation-block" style="display:none;">
+          <div class="inflation-label">2026 purchasing power equivalent</div>
+          <div class="inflation-value" id="inflation-value">—</div>
+          <div class="inflation-note">
+            CPI-adjusted using US Bureau of Labor Statistics data (multiplier 8.49). 
+            This reflects general inflation only and does not represent actual 
+            Boston real estate market prices in 2026.
+          </div>
         </div>
 
         <div class="confidence-label">Model fit (R² = 0.89 — explains 89% of price variance)</div>
@@ -699,7 +737,11 @@
 
       // Update the result display
       document.getElementById('result-price-value').textContent = '$' + price.toFixed(1) + 'k';
-
+      const CPI_MULTIPLIER = 8.49;
+      const adjusted2026 = (price * 1000 * CPI_MULTIPLIER);
+      document.getElementById('inflation-value').textContent = '~$' + Math.round(adjusted2026).toLocaleString();
+      document.getElementById('inflation-block').style.display = 'block';
+      
       // Animate the confidence bar to 89% (R² score)
       setTimeout(() => {
         document.getElementById('conf-bar').style.width = '89%';
